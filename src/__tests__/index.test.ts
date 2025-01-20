@@ -6,6 +6,7 @@ describe("checkType with TypeScript types", () => {
     expect(checkType("hello")).toEqual({ jsType: "string", tsType: "string" });
     expect(checkType(true)).toEqual({ jsType: "boolean", tsType: "boolean" });
     expect(checkType(null)).toEqual({ jsType: "null", tsType: "null" });
+    expect(checkType(new Date())).toEqual({ jsType: "date", tsType: "Date" });
   });
 
   test("should return correct TypeScript types for arrays", () => {
@@ -20,6 +21,10 @@ describe("checkType with TypeScript types", () => {
     expect(checkType([1, "a", true])).toEqual({
       jsType: "array",
       tsType: "Array<number | string | boolean>",
+    });
+    expect(checkType([new Date()])).toEqual({
+      jsType: "array",
+      tsType: "Array<Date>",
     });
   });
 
