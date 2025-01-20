@@ -1,4 +1,4 @@
-export function checkTsType(value: any): string {
+export function checkTsType<T>(value: T): string {
   if (value === null) return "null"; // Handle null explicitly
   if (Array.isArray(value)) return `Array<${checkArrayType(value)}>`; // Handle arrays explicitly
 
