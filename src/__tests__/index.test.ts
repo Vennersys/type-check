@@ -1,4 +1,4 @@
-import { checkType } from "../index";
+import { checkType } from "../check-type";
 
 // Helper for dataType response
 const dataType = {
