@@ -1,6 +1,6 @@
 import { checkJsType } from "./check-js-type";
 
-type DataValidations = {
+export type DataValidations = {
   validEmail: () => boolean;
   validUkPostcode: () => boolean;
   validPhoneNumber: () => boolean;
