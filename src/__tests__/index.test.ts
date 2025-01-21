@@ -8,7 +8,7 @@ const dataType = {
 };
 
 describe("checkType with TypeScript types", () => {
-  test("should return correct TypeScript types for primitives", () => {
+  it("should return correct TypeScript types for primitives", () => {
     expect(checkType(42)).toEqual({
       jsType: "number",
       tsType: "number",
@@ -36,7 +36,7 @@ describe("checkType with TypeScript types", () => {
     });
   });
 
-  test("should return correct TypeScript types for arrays", () => {
+  it("should return correct TypeScript types for arrays", () => {
     expect(checkType([1, 2, 3])).toEqual({
       jsType: "array",
       tsType: "Array<number>",
@@ -59,7 +59,7 @@ describe("checkType with TypeScript types", () => {
     });
   });
 
-  test("should return correct TypeScript types for objects", () => {
+  it("should return correct TypeScript types for objects", () => {
     expect(checkType({})).toEqual({
       jsType: "object",
       tsType: "Record<string, any>",
