@@ -14,26 +14,33 @@ export type FieldValidator<T> = {
 
 export type ValidationSchema = Record<string, FieldValidator<any>>;
 
+export enum RuleType {
+  REQUIRED = "required",
+  MIN_LENGTH = "minLength",
+  MAX_LENGTH = "maxLength",
+  CUSTOM = "custom",
+}
+
 export class Validator<T> {
   private rules: {
-    type: string;
+    type: RuleType;
     params?: Record<string, any>;
     message: string;
     customFn?: (value: T, model: Record<string, any>) => boolean;
   }[] = [];
 
   required(message: string): this {
-    this.rules.push({ type: "required", message });
+    this.rules.push({ type: RuleType.REQUIRED, message });
     return this;
   }
 
   minLength(length: number, message: string): this {
-    this.rules.push({ type: "minLength", params: { length }, message });
+    this.rules.push({ type: RuleType.MIN_LENGTH, params: { length }, message });
     return this;
   }
 
   maxLength(length: number, message: string): this {
-    this.rules.push({ type: "maxLength", params: { length }, message });
+    this.rules.push({ type: RuleType.MAX_LENGTH, params: { length }, message });
     return this;
   }
 
@@ -41,13 +48,13 @@ export class Validator<T> {
     customFn: (value: T, model: Record<string, any>) => boolean,
     message: string,
   ): this {
-    this.rules.push({ type: "custom", customFn, message });
+    this.rules.push({ type: RuleType.CUSTOM, customFn, message });
     return this;
   }
 
   public evaluateRule(
     rule: {
-      type: string;
+      type: RuleType;
       params?: Record<string, any>;
       message: string;
       customFn?: (value: T, model: Record<string, any>) => boolean;
@@ -58,13 +65,13 @@ export class Validator<T> {
     const { type, params, customFn, message } = rule;
     let isValid = true;
 
-    if (type === "custom" && customFn) {
+    if (type === RuleType.CUSTOM && customFn) {
       isValid = customFn(value, model);
-    } else if (type === "required") {
+    } else if (type === RuleType.REQUIRED) {
       isValid = value != null && value !== "" && value !== undefined;
-    } else if (type === "minLength" && value != null) {
+    } else if (type === RuleType.MIN_LENGTH && value != null) {
       isValid = (value as string).length >= params?.length;
-    } else if (type === "maxLength" && value != null) {
+    } else if (type === RuleType.MAX_LENGTH && value != null) {
       isValid = (value as string).length <= params?.length;
     }
 
@@ -75,7 +82,7 @@ export class Validator<T> {
   }
 
   validate(value: T, model: Record<string, any>): ValidationResult {
-    return this.rules.reduce(
+    return this.rules.reduce<ValidationResult>(
       (result, rule) => {
         const { valid, validationMessages } = this.evaluateRule(
           rule,
@@ -90,7 +97,7 @@ export class Validator<T> {
           ],
         };
       },
-      { valid: true as boolean, validationMessages: [] as string[] },
+      { valid: true, validationMessages: [] } as ValidationResult,
     );
   }
 
@@ -123,25 +130,33 @@ export function evaluateSchema(
     const value = model[field];
     const rules = validator.getRules();
 
-    const unmetRules = rules.reduce((acc: any, rule) => {
-      const { valid, validationMessages } = validator.evaluateRule(
-        rule,
-        value,
-        model,
-      );
+    const fieldRules = Object.values(RuleType).reduce((acc: any, ruleType) => {
+      const rule = rules.find((r) => r.type === ruleType);
 
-      if (!valid) {
-        acc[rule.type] = {
-          ...rule.params,
-          validationMessages: validationMessages[0], // Assuming one message per rule
+      if (rule) {
+        const { valid } = validator.evaluateRule(rule, value, model);
+        acc[ruleType] = {
+          ...(rule.params || null),
+          validationMessages: rule.message,
+          valid,
         };
+      } else {
+        acc[ruleType] = null; // Rule not set for this field
       }
 
       return acc;
     }, {});
 
-    if (Object.keys(unmetRules).length > 0) {
-      result[field] = unmetRules;
+    result[field] = fieldRules;
+  }
+
+  // Include fields in the model that are not in the schema
+  for (const field in model) {
+    if (!(field in result)) {
+      result[field] = Object.values(RuleType).reduce((acc: any, ruleType) => {
+        acc[ruleType] = null; // No rules applied
+        return acc;
+      }, {});
     }
   }
 
