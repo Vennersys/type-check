@@ -22,7 +22,7 @@ A lightweight and flexible JavaScript/TypeScript library for validating data str
 Install the library via npm:
 
 ```bash
-npm install your-validator-library
+npm install @leewinter/type-check
 ```
 
 ---
@@ -34,13 +34,13 @@ npm install your-validator-library
 #### JavaScript
 
 ```javascript
-const { typeField } = require("your-validator-library");
+const { typeField } = require("@leewinter/type-check");
 ```
 
 #### TypeScript
 
 ```typescript
-import { typeField } from "your-validator-library";
+import { typeField } from "@leewinter/type-check";
 ```
 
 ---
@@ -108,7 +108,7 @@ const schema = {
 Use `validateSchema` to validate your data model against the schema.
 
 ```typescript
-import { validateSchema } from "your-validator-library";
+import { validateSchema } from "@leewinter/type-check";
 
 const schema = {
   name: typeField<string>("string").required("Name is required."),
