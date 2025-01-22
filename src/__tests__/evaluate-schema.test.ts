@@ -1,4 +1,4 @@
-import { Validator, evaluateSchema } from "../validate-schema";
+import { evaluateSchema, Validator } from "../validation";
 
 describe("evaluateSchema", () => {
   it("returns an object with null values for all rules for an empty schema", () => {

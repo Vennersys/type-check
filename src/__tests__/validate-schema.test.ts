@@ -1,8 +1,4 @@
-import {
-  validateSchema,
-  ValidationSchema,
-  typeField,
-} from "../validate-schema";
+import { validateSchema, ValidationSchema, typeField } from "../validation";
 
 describe("validateSchema with TypeScript types", () => {
   it("validates required fields", () => {

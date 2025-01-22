@@ -1,4 +1,5 @@
-const { validateSchema, typeField } = require("../validate-schema");
+const { validateSchema } = require("../validation/validate-schema");
+const { typeField } = require("../validation/type-field");
 
 describe("validateSchema with JavaScript types", () => {
   it("validates required fields", () => {
