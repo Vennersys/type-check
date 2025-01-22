@@ -1,5 +1,5 @@
 {
-  "name": "type-check",
+  "name": "@leewinter/type-check",
   "version": "0.2.0",
   "description": "Library for checking js object property types",
   "main": "dist/my-library.cjs.js",
