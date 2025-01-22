@@ -1,4 +1,5 @@
-export { checkJsType } from "./check-js-type";
-export { checkTsType } from "./check-ts-type";
-export { checkDataType, type DataValidations } from "./check-data-type";
-export { checkType } from "./check-type";
+export * from "./check-js-type";
+export * from "./check-ts-type";
+export * from "./check-data-type";
+export * from "./check-type";
+export * from "./validation";

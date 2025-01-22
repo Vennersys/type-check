@@ -2,14 +2,14 @@
   "name": "type-check",
   "version": "0.1.0",
   "description": "Library for checking js object property types",
-  "main": "dist/my-library.cjs.js",
-  "module": "dist/my-library.es.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/type-check.cjs.js",
+  "module": "dist/type-check.es.js",
+  "types": "dist/types/index.d.ts",
   "files": [
-    "dist"
+    "dist && vite build"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "tsc && vite build",
     "dev": "vite",
     "lint": "eslint src --ext .ts",
     "test": "jest --verbose",
