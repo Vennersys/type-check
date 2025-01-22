@@ -5,43 +5,35 @@ export type ValidationResult = {
 
 export type FieldValidator<T> = {
   validate: (value: T, model: Record<string, any>) => ValidationResult;
+  getRules: () => {
+    type: string;
+    params?: Record<string, any>;
+    message: string;
+  }[];
 };
 
 export type ValidationSchema = Record<string, FieldValidator<any>>;
 
 export class Validator<T> {
-  private rules: ((
-    value: T,
-    model: Record<string, any>,
-  ) => ValidationResult)[] = [];
+  private rules: {
+    type: string;
+    params?: Record<string, any>;
+    message: string;
+    customFn?: (value: T, model: Record<string, any>) => boolean;
+  }[] = [];
 
   required(message: string): this {
-    this.rules.push((value) => ({
-      valid: value != null && value !== "",
-      validationMessages: value == null || value === "" ? [message] : [],
-    }));
+    this.rules.push({ type: "required", message });
     return this;
   }
 
-  minLength(min: number, message: string): this {
-    this.rules.push((value: T) => {
-      const strValue = value as string;
-      return {
-        valid: strValue.length >= min,
-        validationMessages: strValue.length < min ? [message] : [],
-      };
-    });
+  minLength(length: number, message: string): this {
+    this.rules.push({ type: "minLength", params: { length }, message });
     return this;
   }
 
-  maxLength(max: number, message: string): this {
-    this.rules.push((value: T) => {
-      const strValue = value as string;
-      return {
-        valid: strValue.length <= max,
-        validationMessages: strValue.length > max ? [message] : [],
-      };
-    });
+  maxLength(length: number, message: string): this {
+    this.rules.push({ type: "maxLength", params: { length }, message });
     return this;
   }
 
@@ -49,27 +41,39 @@ export class Validator<T> {
     customFn: (value: T, model: Record<string, any>) => boolean,
     message: string,
   ): this {
-    this.rules.push((value, model) => ({
-      valid: customFn(value, model),
-      validationMessages: customFn(value, model) ? [] : [message],
-    }));
+    this.rules.push({ type: "custom", customFn, message });
     return this;
   }
 
   validate(value: T, model: Record<string, any>): ValidationResult {
     return this.rules.reduce(
       (result, rule) => {
-        const validation = rule(value, model);
+        const { type, params, customFn } = rule;
+        let isValid = true;
+
+        if (type === "custom" && customFn) {
+          isValid = customFn(value, model);
+        } else if (type === "required") {
+          isValid = value != null && value !== "" && value !== undefined;
+        } else if (type === "minLength" && value != null) {
+          isValid = (value as string).length >= params?.length;
+        } else if (type === "maxLength" && value != null) {
+          isValid = (value as string).length <= params?.length;
+        }
+
         return {
-          valid: result.valid && validation.valid,
-          validationMessages: [
-            ...result.validationMessages,
-            ...validation.validationMessages,
-          ],
+          valid: result.valid && isValid,
+          validationMessages: !isValid
+            ? [...result.validationMessages, rule.message]
+            : result.validationMessages,
         };
       },
-      { valid: true, validationMessages: [] } as ValidationResult,
+      { valid: true as boolean, validationMessages: [] as string[] },
     );
+  }
+
+  getRules() {
+    return this.rules;
   }
 }
 
@@ -83,6 +87,25 @@ export function validateSchema(
     const value = model[field];
     result[field] = validator.validate(value, model);
   }
+  return result;
+}
+
+export function evaluateSchema(schema: ValidationSchema): Record<string, any> {
+  const result: Record<string, any> = {};
+
+  for (const field in schema) {
+    const validator = schema[field];
+    const rules = validator.getRules();
+
+    result[field] = rules.reduce((acc: Record<string, any>, rule) => {
+      acc[rule.type] = {
+        ...rule.params,
+        validationMessages: rule.message,
+      };
+      return acc;
+    }, {});
+  }
+
   return result;
 }
 

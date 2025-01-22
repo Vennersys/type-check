@@ -1,8 +1,7 @@
 const { validateSchema, typeField } = require("../validate-schema");
 
-// Added js validation tests to ensure that the schema validation works with javascript types
-describe("validateSchema with Javascript types", () => {
-  it("should validate required fields", () => {
+describe("validateSchema with JavaScript types", () => {
+  it("validates required fields", () => {
     const schema = {
       field1: typeField("string").required("This field is required."),
     };
@@ -19,7 +18,7 @@ describe("validateSchema with Javascript types", () => {
     });
   });
 
-  it("should validate minLength and maxLength", () => {
+  it("validates minLength and maxLength", () => {
     const schema = {
       field1: typeField("string")
         .minLength(3, "Minimum length is 3.")
@@ -46,7 +45,7 @@ describe("validateSchema with Javascript types", () => {
     });
   });
 
-  it("should validate custom rules", () => {
+  it("validates custom rules", () => {
     const schema = {
       field2: typeField("date"),
       field4: typeField("date").custom(
@@ -76,7 +75,7 @@ describe("validateSchema with Javascript types", () => {
     });
   });
 
-  it("should validate multiple fields with mixed results", () => {
+  it("validates multiple fields with mixed results", () => {
     const schema = {
       field1: typeField("string")
         .required("This field is required.")
@@ -105,7 +104,7 @@ describe("validateSchema with Javascript types", () => {
     });
   });
 
-  it("should handle a valid model", () => {
+  it("handles valid models", () => {
     const schema = {
       field1: typeField("string").required("This field is required."),
       field2: typeField("date"),
@@ -126,6 +125,39 @@ describe("validateSchema with Javascript types", () => {
     expect(result.field2).toEqual({
       valid: true,
       validationMessages: [],
+    });
+  });
+
+  it("handles empty schema and model", () => {
+    const schema = {};
+    const model = {};
+
+    const result = validateSchema(schema, model);
+
+    expect(result).toEqual({});
+  });
+
+  it("handles a model with no matching schema", () => {
+    const schema = {};
+    const model = { field1: "Unused" };
+
+    const result = validateSchema(schema, model);
+
+    expect(result).toEqual({});
+  });
+
+  it("handles schema with no corresponding model fields", () => {
+    const schema = {
+      field1: typeField("string").required("This field is required."),
+    };
+
+    const model = {};
+
+    const result = validateSchema(schema, model);
+
+    expect(result.field1).toEqual({
+      valid: false,
+      validationMessages: ["This field is required."],
     });
   });
 });
