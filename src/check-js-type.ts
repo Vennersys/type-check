@@ -1,4 +1,4 @@
-export function checkJsType(value: any): string {
+export function checkJsType<T>(value: T): string {
   // Handle special cases explicitly
   if (value === null) return "null";
   if (Array.isArray(value)) return "array";

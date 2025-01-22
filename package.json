@@ -12,7 +12,7 @@
     "build": "vite build",
     "dev": "vite",
     "lint": "eslint src --ext .ts",
-    "test": "jest",
+    "test": "jest --verbose",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,json,md}'"
   },
   "author": "lee.winter@boxspark.co.uk",
