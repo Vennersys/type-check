@@ -8,10 +8,12 @@ export default defineConfig({
       fileName: (format) => `type-check.${format}.js`,
       formats: ["es", "cjs"], // Generate ESM and CommonJS bundles
     },
+    emptyOutDir: false,
     rollupOptions: {
       // Externalize dependencies
       external: [], // Specify external dependencies here
       output: {
+        preserveModules: true,
         globals: {},
       },
     },
