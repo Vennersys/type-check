@@ -1,6 +1,6 @@
 {
   "name": "@leewinter/type-check",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Library for checking js object property types",
   "main": "dist/type-check.cjs.js",
   "module": "dist/type-check.es.js",
