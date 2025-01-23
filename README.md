@@ -1,5 +1,10 @@
 # type-check
 
+![License: MIT](https://img.shields.io/github/license/leewinter/type-check)
+![Version](https://img.shields.io/github/package-json/v/leewinter/type-check)
+![GitHub last commit](https://img.shields.io/github/last-commit/leewinter/type-check)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/leewinter/type-check)
+
 # Validator Library
 
 A lightweight and flexible JavaScript/TypeScript library for validating data structures with support for multiple data types, including strings, numbers, objects, arrays, functions, and symbols. This library provides a unified and extensible API for both runtime and compile-time validation.
