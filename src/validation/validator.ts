@@ -25,7 +25,7 @@ export class Validator<T> {
 
   custom(
     customFn: (value: T, model: Record<string, any>) => boolean,
-    message: string,
+    message: string
   ): this {
     this.rules.push({ type: RuleType.CUSTOM, customFn, message });
     return this;
@@ -39,7 +39,7 @@ export class Validator<T> {
       customFn?: (value: T, model: Record<string, any>) => boolean;
     },
     value: T,
-    model: Record<string, any>,
+    model: Record<string, any>
   ): { valid: boolean; validationMessages: string[] } {
     const { type, params, customFn, message } = rule;
     let isValid = true;
@@ -66,7 +66,7 @@ export class Validator<T> {
         const { valid, validationMessages } = this.evaluateRule(
           rule,
           value,
-          model,
+          model
         );
         return {
           valid: result.valid && valid,
@@ -76,7 +76,7 @@ export class Validator<T> {
           ],
         };
       },
-      { valid: true, validationMessages: [] } as ValidationResult,
+      { valid: true, validationMessages: [] } as ValidationResult
     );
   }
 

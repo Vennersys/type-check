@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { checkType } from "../check-type";
 
 // Helper for dataType response

@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { validateSchema, ValidationSchema, typeField } from "../validation";
 
 describe("validateSchema with TypeScript types", () => {
@@ -50,7 +51,7 @@ describe("validateSchema with TypeScript types", () => {
       field2: typeField<Date>("date"),
       field4: typeField<Date>("date").custom(
         (value, model) => model.field2 >= value,
-        "field2 must be more recent than field4",
+        "field2 must be more recent than field4"
       ),
     };
 
@@ -82,7 +83,7 @@ describe("validateSchema with TypeScript types", () => {
         .maxLength(10, "Maximum length is 10."),
       field2: typeField<Date>("date").custom(
         (value, model) => value <= new Date(),
-        "Date cannot be in the future.",
+        "Date cannot be in the future."
       ),
     };
 

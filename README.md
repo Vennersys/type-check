@@ -75,7 +75,7 @@ const schema = {
 ```typescript
 const schema = {
   user: typeField<Record<string, any>>("object").required(
-    "User object is required.",
+    "User object is required."
   ),
 };
 ```
@@ -93,7 +93,7 @@ const schema = {
 ```typescript
 const schema = {
   callback: typeField<() => void>("function").required(
-    "Callback function is required.",
+    "Callback function is required."
   ),
 };
 ```

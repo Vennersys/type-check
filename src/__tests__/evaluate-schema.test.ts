@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { evaluateSchema, typeField } from "../validation";
 
 describe("evaluateSchema", () => {
@@ -112,7 +113,7 @@ describe("evaluateSchema", () => {
     const schema = {
       field2: typeField<Date>("date").custom(
         (value, model) => value > new Date("2023-01-01"),
-        "Date must be after 2023-01-01.",
+        "Date must be after 2023-01-01."
       ),
     };
 
@@ -136,7 +137,7 @@ describe("evaluateSchema", () => {
     const schema = {
       field2: typeField<Date>("date").custom(
         (value, model) => value > new Date("2023-01-01"),
-        "Date must be after 2023-01-01.",
+        "Date must be after 2023-01-01."
       ),
     };
 
@@ -164,7 +165,7 @@ describe("evaluateSchema", () => {
         .maxLength(5, "Maximum length is 5."),
       field2: typeField<Date>("date").custom(
         (value, model) => value > new Date("2023-01-01"),
-        "Date must be after 2023-01-01.",
+        "Date must be after 2023-01-01."
       ),
     };
 
