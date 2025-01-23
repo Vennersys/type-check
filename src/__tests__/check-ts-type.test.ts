@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { checkTsType } from "../check-ts-type";
 
 describe("checkTsType", () => {
@@ -59,7 +60,7 @@ describe("checkTsType", () => {
 
     it("should return 'Array<any>' for arrays with mixed types", () => {
       expect(checkTsType([null, "test", 42, true])).toBe(
-        "Array<null | string | number | boolean>",
+        "Array<null | string | number | boolean>"
       );
     });
   });

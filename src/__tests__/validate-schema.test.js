@@ -1,5 +1,6 @@
-const { validateSchema } = require("../validation/validate-schema");
-const { typeField } = require("../validation/type-field");
+import { describe, expect, it } from "vitest";
+import { validateSchema } from "../validation/validate-schema";
+import { typeField } from "../validation/type-field";
 
 describe("validateSchema with JavaScript types", () => {
   it("validates required fields", () => {
@@ -51,7 +52,7 @@ describe("validateSchema with JavaScript types", () => {
       field2: typeField("date"),
       field4: typeField("date").custom(
         (value, model) => model.field2 >= value,
-        "field2 must be more recent than field4",
+        "field2 must be more recent than field4"
       ),
     };
 
@@ -83,7 +84,7 @@ describe("validateSchema with JavaScript types", () => {
         .maxLength(10, "Maximum length is 10."),
       field2: typeField("date").custom(
         (value, model) => value <= new Date(),
-        "Date cannot be in the future.",
+        "Date cannot be in the future."
       ),
     };
 
