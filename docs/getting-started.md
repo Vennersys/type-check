@@ -34,7 +34,7 @@ import { typeField } from "@leewinter/type-check";
 
 ```typescript
 const schema = {
-  name: typeField<string>("string").required("Name is required."),
+  name: typeField<string>(SupportedType.STRING).required("Name is required."),
 };
 ```
 
@@ -42,7 +42,7 @@ const schema = {
 
 ```typescript
 const schema = {
-  age: typeField<number>("number")
+  age: typeField<number>(SupportedType.NUMBER)
     .required("Age is required.")
     .minLength(1, "Age must be at least 1."),
 };
@@ -52,7 +52,7 @@ const schema = {
 
 ```typescript
 const schema = {
-  user: typeField<Record<string, any>>("object").required(
+  user: typeField<Record<string, any>>(SupportedType.OBJECT).required(
     "User object is required."
   ),
 };
@@ -62,7 +62,9 @@ const schema = {
 
 ```typescript
 const schema = {
-  items: typeField<number[]>("array").required("Items are required."),
+  items: typeField<number[]>(SupportedType.ARRAY).required(
+    "Items are required."
+  ),
 };
 ```
 
@@ -70,7 +72,7 @@ const schema = {
 
 ```typescript
 const schema = {
-  callback: typeField<() => void>("function").required(
+  callback: typeField<() => void>(SupportedType.FUNCTION).required(
     "Callback function is required."
   ),
 };
@@ -80,7 +82,9 @@ const schema = {
 
 ```typescript
 const schema = {
-  uniqueId: typeField<symbol>("symbol").required("Unique ID is required."),
+  uniqueId: typeField<symbol>(SupportedType.SYMBOL).required(
+    "Unique ID is required."
+  ),
 };
 ```
 
@@ -94,8 +98,11 @@ Use `validateSchema` to validate your data model against the schema.
 import { validateSchema } from "@leewinter/type-check";
 
 const schema = {
-  name: typeField<string>("string").required("Name is required."),
-  age: typeField<number>("number").minLength(1, "Age must be at least 1."),
+  name: typeField<string>(SupportedType.STRING).required("Name is required."),
+  age: typeField<number>(SupportedType.NUMBER).minLength(
+    1,
+    "Age must be at least 1."
+  ),
 };
 
 const model = {

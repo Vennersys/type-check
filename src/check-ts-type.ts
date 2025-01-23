@@ -1,9 +1,11 @@
+import { SupportedType } from "./supported-types";
+
 export function checkTsType<T>(value: T): string {
-  if (value === null) return "null"; // Handle null explicitly
+  if (value === null) return SupportedType.NULL; // Handle null explicitly
   if (Array.isArray(value)) return `Array<${checkArrayType(value)}>`; // Handle arrays explicitly
 
   const type = typeof value;
-  if (type !== "object") return primitiveType(type); // Handle primitive types early
+  if (type !== SupportedType.OBJECT) return primitiveType(type); // Handle primitive types early
 
   // Handle objects and special objects
   const objectType = Object.prototype.toString
@@ -31,12 +33,12 @@ function checkArrayType(array: any[]): string {
 // Helper to map primitive types
 function primitiveType(type: string): string {
   const typeMap: Record<string, string> = {
-    string: "string",
-    number: "number",
-    boolean: "boolean",
-    undefined: "undefined",
-    function: "Function",
-    symbol: "symbol",
+    [SupportedType.STRING]: SupportedType.STRING,
+    [SupportedType.NUMBER]: SupportedType.NUMBER,
+    [SupportedType.BOOLEAN]: SupportedType.BOOLEAN,
+    [SupportedType.UNDEFINED]: SupportedType.UNDEFINED,
+    [SupportedType.FUNCTION]: "Function",
+    [SupportedType.SYMBOL]: SupportedType.SYMBOL,
   };
 
   return typeMap[type] || "unknown";

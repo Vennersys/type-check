@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { evaluateSchema, typeField } from "../validation";
+import { SupportedType } from "../supported-types";
 
 describe("evaluateSchema", () => {
   it("returns an object with null values for all rules for an empty schema", () => {
@@ -13,7 +14,9 @@ describe("evaluateSchema", () => {
 
   it("includes satisfied required rules as valid: true", () => {
     const schema = {
-      field1: typeField<string>("string").required("This field is required."),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
     };
 
     const model = { field1: "Valid" }; // Field satisfies the `required` rule
@@ -34,7 +37,9 @@ describe("evaluateSchema", () => {
 
   it("includes unmet required rules as valid: false", () => {
     const schema = {
-      field1: typeField<string>("string").required("This field is required."),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
     };
 
     const model = { field1: "" }; // Field does not satisfy the `required` rule
@@ -55,7 +60,7 @@ describe("evaluateSchema", () => {
 
   it("includes satisfied minLength and maxLength rules as valid: true", () => {
     const schema = {
-      field1: typeField<string>("string")
+      field1: typeField<string>(SupportedType.STRING)
         .minLength(3, "Minimum length is 3.")
         .maxLength(5, "Maximum length is 5."),
     };
@@ -83,7 +88,7 @@ describe("evaluateSchema", () => {
 
   it("includes unmet minLength rules as valid: false and satisfied maxLength rules as valid: true", () => {
     const schema = {
-      field1: typeField<string>("string")
+      field1: typeField<string>(SupportedType.STRING)
         .minLength(3, "Minimum length is 3.")
         .maxLength(5, "Maximum length is 5."),
     };
@@ -111,7 +116,7 @@ describe("evaluateSchema", () => {
 
   it("includes satisfied custom rules as valid: true", () => {
     const schema = {
-      field2: typeField<Date>("date").custom(
+      field2: typeField<Date>(SupportedType.DATE).custom(
         (value, model) => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
@@ -135,7 +140,7 @@ describe("evaluateSchema", () => {
 
   it("includes unmet custom rules as valid: false", () => {
     const schema = {
-      field2: typeField<Date>("date").custom(
+      field2: typeField<Date>(SupportedType.DATE).custom(
         (value, model) => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
@@ -159,11 +164,11 @@ describe("evaluateSchema", () => {
 
   it("handles schemas with multiple fields and mixed results", () => {
     const schema = {
-      field1: typeField<string>("string")
+      field1: typeField<string>(SupportedType.STRING)
         .required("This field is required.")
         .minLength(3, "Minimum length is 3.")
         .maxLength(5, "Maximum length is 5."),
-      field2: typeField<Date>("date").custom(
+      field2: typeField<Date>(SupportedType.DATE).custom(
         (value, model) => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
@@ -208,7 +213,7 @@ describe("evaluateSchema", () => {
 
   it("handles a schema with no validation rules for a field", () => {
     const schema = {
-      field1: typeField<string>("string"),
+      field1: typeField<string>(SupportedType.STRING),
     };
 
     const model = { field1: "Any value" }; // No rules to check
