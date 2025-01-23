@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
+    "prepare": "npm run build",
     "build": "npm run clean && tsc && vite build",
     "dev": "vite",
     "lint": "eslint src --ext .ts",
@@ -29,6 +30,9 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
     "vite": "^6.0.7"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.15.0"
   },
   "sideEffects": false
 }

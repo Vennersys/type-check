@@ -1,12 +1,13 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
 
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/index.ts", // Path to your library's entry point
-      name: "TypeCheck", // Global variable for UMD build
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "TypeCheck",
       fileName: (format) => `type-check.${format}.js`,
-      formats: ["es"], // Generate ESM and CommonJS bundles
+      formats: ["es"],
     },
     emptyOutDir: false,
     rollupOptions: {
