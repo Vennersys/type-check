@@ -14,6 +14,7 @@
     }
   },
   "files": [
+    "build",
     "dist",
     "package.json",
     "README.md",
@@ -21,7 +22,7 @@
   ],
   "scripts": {
     "dev": "vite --host",
-    "build": "rimraf build && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts && copyfiles ./package.json README.md LICENSE build",
+    "build": "rimraf build && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "lint:scripts": "eslint . --ext .ts",
