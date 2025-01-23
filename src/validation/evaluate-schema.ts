@@ -3,7 +3,7 @@ import { RuleType } from "./validation-types";
 
 export function evaluateSchema(
   schema: Record<string, Validator<any>>,
-  model: Record<string, any>,
+  model: Record<string, any>
 ): Record<string, any> {
   const result: Record<string, any> = {};
 
@@ -13,7 +13,7 @@ export function evaluateSchema(
     const rules = validator.getRules();
 
     const fieldRules = Object.values(RuleType).reduce((acc: any, ruleType) => {
-      const rule = rules.find((r) => r.type === ruleType);
+      const rule = rules.find(r => r.type === ruleType);
 
       if (rule) {
         const { valid } = validator.evaluateRule(rule, value, model);
