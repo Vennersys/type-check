@@ -14,14 +14,14 @@
     }
   },
   "files": [
-    "build",
+    "dist",
     "package.json",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "dev": "vite --host",
-    "build": "rimraf build && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts && copyfiles ./package.json build",
+    "build": "rimraf build && tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts && copyfiles ./package.json README.md LICENSE build",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "lint:scripts": "eslint . --ext .ts",
