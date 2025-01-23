@@ -14,7 +14,10 @@
     }
   },
   "files": [
-    "dist && vite build"
+    "build",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "vite --host",
