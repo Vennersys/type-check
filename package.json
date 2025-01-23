@@ -1,6 +1,8 @@
 {
   "name": "@leewinter/type-check",
   "version": "0.3.9",
+  "author": "lee.winter@boxspark.co.uk",
+  "license": "MIT",
   "description": "Library for checking js object property types",
   "type": "module",
   "module": "./dist/@leewinter/type-check.js",
@@ -32,8 +34,6 @@
     "prepare": "husky && echo 'npx lint-staged' > .husky/pre-commit && git add .husky/pre-commit",
     "uninstall-husky": "npm uninstall husky --no-save && git config --unset core.hooksPath && npx rimraf .husky"
   },
-  "author": "lee.winter@boxspark.co.uk",
-  "license": "MIT",
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.0.0",
@@ -64,5 +64,27 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.15.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "validation",
+    "validator",
+    "data-validation",
+    "typescript",
+    "javascript",
+    "schema-validation",
+    "custom-validation",
+    "field-validation",
+    "type-safe",
+    "runtime-validation",
+    "form-validation",
+    "react-validation",
+    "array-validation",
+    "object-validation",
+    "string-validation",
+    "number-validation",
+    "symbol-validation",
+    "function-validation",
+    "input-validation",
+    "lightweight-validator"
+  ]
 }
