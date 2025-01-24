@@ -18,5 +18,7 @@ export enum RuleType {
   REQUIRED = "required",
   MIN_LENGTH = "minLength",
   MAX_LENGTH = "maxLength",
+  MIN_VALUE = "minValue",
+  MAX_VALUE = "maxValue",
   CUSTOM = "custom",
 }

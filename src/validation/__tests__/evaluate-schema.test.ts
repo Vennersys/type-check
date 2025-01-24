@@ -30,6 +30,8 @@ describe("evaluateSchema", () => {
         },
         minLength: null,
         maxLength: null,
+        maxValue: null,
+        minValue: null,
         custom: null,
       },
     });
@@ -53,6 +55,8 @@ describe("evaluateSchema", () => {
         },
         minLength: null,
         maxLength: null,
+        maxValue: null,
+        minValue: null,
         custom: null,
       },
     });
@@ -82,6 +86,8 @@ describe("evaluateSchema", () => {
           valid: true,
         },
         custom: null,
+        maxValue: null,
+        minValue: null,
       },
     });
   });
@@ -110,6 +116,8 @@ describe("evaluateSchema", () => {
           valid: true,
         },
         custom: null,
+        maxValue: null,
+        minValue: null,
       },
     });
   });
@@ -134,6 +142,8 @@ describe("evaluateSchema", () => {
           validationMessages: "Date must be after 2023-01-01.",
           valid: true,
         },
+        maxValue: null,
+        minValue: null,
       },
     });
   });
@@ -158,6 +168,8 @@ describe("evaluateSchema", () => {
           validationMessages: "Date must be after 2023-01-01.",
           valid: false,
         },
+        maxValue: null,
+        minValue: null,
       },
     });
   });
@@ -198,6 +210,8 @@ describe("evaluateSchema", () => {
           valid: true,
         },
         custom: null,
+        maxValue: null,
+        minValue: null,
       },
       field2: {
         required: null,
@@ -207,6 +221,8 @@ describe("evaluateSchema", () => {
           validationMessages: "Date must be after 2023-01-01.",
           valid: false,
         },
+        maxValue: null,
+        minValue: null,
       },
     });
   });
@@ -225,6 +241,8 @@ describe("evaluateSchema", () => {
         minLength: null,
         maxLength: null,
         custom: null,
+        maxValue: null,
+        minValue: null,
       },
     });
   });

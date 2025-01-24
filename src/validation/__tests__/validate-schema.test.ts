@@ -49,6 +49,33 @@ describe("validateSchema with TypeScript types", () => {
     });
   });
 
+  it("validates minValue and maxValue", () => {
+    const schema: ValidationSchema = {
+      field1: typeField<number>(SupportedType.NUMBER)
+        .minValue(10, "Minimum value is 10.")
+        .maxValue(20, "Maximum value is 20."),
+    };
+
+    const modelTooSmall = { field1: 5 };
+    const modelValid = { field1: 15 };
+    const modelTooLarge = { field1: 25 };
+
+    expect(validateSchema(schema, modelTooSmall).field1).toEqual({
+      valid: false,
+      validationMessages: ["Minimum value is 10."],
+    });
+
+    expect(validateSchema(schema, modelValid).field1).toEqual({
+      valid: true,
+      validationMessages: [],
+    });
+
+    expect(validateSchema(schema, modelTooLarge).field1).toEqual({
+      valid: false,
+      validationMessages: ["Maximum value is 20."],
+    });
+  });
+
   it("validates custom rules", () => {
     const schema: ValidationSchema = {
       field2: typeField<Date>(SupportedType.DATE),

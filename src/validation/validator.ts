@@ -1,5 +1,25 @@
 import { RuleType, ValidationResult } from "./validation-types";
 
+function requiredCheck(value: any) {
+  return value != null && value !== "" && value !== undefined;
+}
+
+function minLengthCheck(value: any, params?: Record<string, any>) {
+  return (value as string).length >= params?.length;
+}
+
+function maxLengthCheck(value: any, params?: Record<string, any>) {
+  return (value as string).length <= params?.length;
+}
+
+function minValueCheck(value: any, params?: Record<string, any>) {
+  return (value as number) >= params?.size;
+}
+
+function maxValueCheck(value: any, params?: Record<string, any>) {
+  return (value as number) <= params?.size;
+}
+
 export class Validator<T> {
   private rules: {
     type: RuleType;
@@ -20,6 +40,24 @@ export class Validator<T> {
 
   maxLength(length: number, message: string): this {
     this.rules.push({ type: RuleType.MAX_LENGTH, params: { length }, message });
+    return this;
+  }
+
+  minValue(size: number, message: string): this {
+    this.rules.push({
+      type: RuleType.MIN_VALUE,
+      params: { size },
+      message,
+    });
+    return this;
+  }
+
+  maxValue(size: number, message: string): this {
+    this.rules.push({
+      type: RuleType.MAX_VALUE,
+      params: { size },
+      message,
+    });
     return this;
   }
 
@@ -44,14 +82,37 @@ export class Validator<T> {
     const { type, params, customFn, message } = rule;
     let isValid = true;
 
-    if (type === RuleType.CUSTOM && customFn) {
-      isValid = customFn(value, model);
-    } else if (type === RuleType.REQUIRED) {
-      isValid = value != null && value !== "" && value !== undefined;
-    } else if (type === RuleType.MIN_LENGTH && value != null) {
-      isValid = (value as string).length >= params?.length;
-    } else if (type === RuleType.MAX_LENGTH && value != null) {
-      isValid = (value as string).length <= params?.length;
+    switch (type) {
+      case RuleType.CUSTOM:
+        if (customFn) {
+          isValid = customFn(value, model);
+        }
+        break;
+      case RuleType.REQUIRED:
+        isValid = requiredCheck(value);
+        break;
+      case RuleType.MIN_LENGTH:
+        if (value != null) {
+          isValid = minLengthCheck(value, params);
+        }
+        break;
+      case RuleType.MAX_LENGTH:
+        if (value != null) {
+          isValid = maxLengthCheck(value, params);
+        }
+        break;
+      case RuleType.MIN_VALUE:
+        if (value != null) {
+          isValid = minValueCheck(value, params);
+        }
+        break;
+      case RuleType.MAX_VALUE:
+        if (value != null) {
+          isValid = maxValueCheck(value, params);
+        }
+        break;
+      default:
+        isValid = true;
     }
 
     return {
