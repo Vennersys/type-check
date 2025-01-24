@@ -16,7 +16,7 @@ export function typeField<T>(typeName: string): Validator<T> {
 
   if (!typeName) throw new Error("Type name is required");
 
-  if (!supportedTypes.includes(typeName.toLowerCase())) {
+  if (!supportedTypes.includes(typeName.toLowerCase() as SupportedType)) {
     throw new Error(`Unsupported type: ${typeName}`);
   }
 
