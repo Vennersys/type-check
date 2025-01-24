@@ -1,6 +1,6 @@
-import { checkJsType } from "./check-js-type";
-import { checkTsType } from "./check-ts-type";
-import { type DataValidations, checkDataType } from "./check-data-type";
+import { checkJsType } from "@/type-checking";
+import { checkTsType } from "@/type-checking";
+import { type DataValidations, checkDataType } from "@/type-checking";
 
 type TypeAnalysis = {
   jsType: string;

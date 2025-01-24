@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { evaluateSchema, typeField } from "../validation";
-import { SupportedType } from "../supported-types";
+import { evaluateSchema, typeField } from "../";
+import { SupportedType } from "../../type-checking/supported-types";
 
 describe("evaluateSchema", () => {
   it("returns an object with null values for all rules for an empty schema", () => {

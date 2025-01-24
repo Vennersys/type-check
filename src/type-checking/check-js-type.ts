@@ -1,4 +1,4 @@
-import { SupportedType } from "./supported-types";
+import { SupportedType } from "@/type-checking";
 
 export function checkJsType<T>(value: T): string {
   // Handle special cases explicitly
@@ -21,5 +21,7 @@ export function checkJsType<T>(value: T): string {
     SupportedType.SET,
   ]);
 
-  return specialObjects.has(objectType) ? objectType : SupportedType.OBJECT;
+  return specialObjects.has(objectType as SupportedType)
+    ? objectType
+    : SupportedType.OBJECT;
 }
