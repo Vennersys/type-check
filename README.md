@@ -20,9 +20,7 @@ A lightweight and flexible JavaScript/TypeScript library for validating data str
 
 ---
 
-[Getting Started](docs/getting-started.md)
-
-[API Reference](docs/api-reference.md)
+## [Visit the docs](https://leewinter.github.io/type-check/)
 
 ## Contributing
 
