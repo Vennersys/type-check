@@ -1,4 +1,4 @@
-import { SupportedType } from "./supported-types";
+import { SupportedType } from "@/type-checking";
 
 export function checkTsType<T>(value: T): string {
   if (value === null) return SupportedType.NULL; // Handle null explicitly

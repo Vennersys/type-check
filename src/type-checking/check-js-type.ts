@@ -1,4 +1,4 @@
-import { SupportedType } from "./supported-types";
+import { SupportedType } from "@/type-checking";
 
 export function checkJsType<T>(value: T): string {
   // Handle special cases explicitly

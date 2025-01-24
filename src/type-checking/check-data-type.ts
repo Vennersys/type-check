@@ -1,5 +1,5 @@
-import { checkJsType } from "./check-js-type";
-import { SupportedType } from "./supported-types";
+import { checkJsType } from "@/type-checking";
+import { SupportedType } from "@/type-checking";
 
 export type DataValidations = {
   validEmail: () => boolean;

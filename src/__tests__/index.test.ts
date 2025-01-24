@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { checkType } from "../check-type";
-import { SupportedType } from "../supported-types";
+import { checkType } from "../type-checking";
+import { SupportedType } from "../type-checking";
 
 // Helper for dataType response
 const dataType = {

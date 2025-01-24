@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { validateSchema, ValidationSchema, typeField } from "../validation";
-import { SupportedType } from "../supported-types";
+import { validateSchema, ValidationSchema, typeField } from "../";
+import { SupportedType } from "../../type-checking/supported-types";
 
 describe("validateSchema with TypeScript types", () => {
   it("validates required fields", () => {
