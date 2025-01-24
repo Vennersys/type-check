@@ -1,30 +1,31 @@
 import { describe, expect, it } from "vitest";
 import { checkTsType } from "../check-ts-type";
+import { SupportedType } from "../supported-types";
 
 describe("checkTsType", () => {
   describe("Primitive types", () => {
     it("should return 'null' for null values", () => {
-      expect(checkTsType(null)).toBe("null");
+      expect(checkTsType(null)).toBe(SupportedType.NULL);
     });
 
     it("should return 'string' for string values", () => {
-      expect(checkTsType("hello")).toBe("string");
-      expect(checkTsType("")).toBe("string");
+      expect(checkTsType("hello")).toBe(SupportedType.STRING);
+      expect(checkTsType("")).toBe(SupportedType.STRING);
     });
 
     it("should return 'number' for number values", () => {
-      expect(checkTsType(42)).toBe("number");
-      expect(checkTsType(-42)).toBe("number");
-      expect(checkTsType(0)).toBe("number");
+      expect(checkTsType(42)).toBe(SupportedType.NUMBER);
+      expect(checkTsType(-42)).toBe(SupportedType.NUMBER);
+      expect(checkTsType(0)).toBe(SupportedType.NUMBER);
     });
 
     it("should return 'boolean' for boolean values", () => {
-      expect(checkTsType(true)).toBe("boolean");
-      expect(checkTsType(false)).toBe("boolean");
+      expect(checkTsType(true)).toBe(SupportedType.BOOLEAN);
+      expect(checkTsType(false)).toBe(SupportedType.BOOLEAN);
     });
 
     it("should return 'undefined' for undefined values", () => {
-      expect(checkTsType(undefined)).toBe("undefined");
+      expect(checkTsType(undefined)).toBe(SupportedType.UNDEFINED);
     });
 
     it("should return 'Function' for functions", () => {
@@ -33,7 +34,7 @@ describe("checkTsType", () => {
     });
 
     it("should return 'symbol' for symbols", () => {
-      expect(checkTsType(Symbol())).toBe("symbol");
+      expect(checkTsType(Symbol())).toBe(SupportedType.SYMBOL);
     });
   });
 

@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { validateSchema, ValidationSchema, typeField } from "../validation";
+import { SupportedType } from "../supported-types";
 
 describe("validateSchema with TypeScript types", () => {
   it("validates required fields", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string").required("This field is required."),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
     };
 
     const model = {
@@ -21,7 +24,7 @@ describe("validateSchema with TypeScript types", () => {
 
   it("validates minLength and maxLength", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string")
+      field1: typeField<string>(SupportedType.STRING)
         .minLength(3, "Minimum length is 3.")
         .maxLength(5, "Maximum length is 5."),
     };
@@ -48,8 +51,8 @@ describe("validateSchema with TypeScript types", () => {
 
   it("validates custom rules", () => {
     const schema: ValidationSchema = {
-      field2: typeField<Date>("date"),
-      field4: typeField<Date>("date").custom(
+      field2: typeField<Date>(SupportedType.DATE),
+      field4: typeField<Date>(SupportedType.DATE).custom(
         (value, model) => model.field2 >= value,
         "field2 must be more recent than field4"
       ),
@@ -78,10 +81,10 @@ describe("validateSchema with TypeScript types", () => {
 
   it("validates multiple fields with mixed results", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string")
+      field1: typeField<string>(SupportedType.STRING)
         .required("This field is required.")
         .maxLength(10, "Maximum length is 10."),
-      field2: typeField<Date>("date").custom(
+      field2: typeField<Date>(SupportedType.DATE).custom(
         (value, model) => value <= new Date(),
         "Date cannot be in the future."
       ),
@@ -107,8 +110,10 @@ describe("validateSchema with TypeScript types", () => {
 
   it("handles a valid model", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string").required("This field is required."),
-      field2: typeField<Date>("date"),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
+      field2: typeField<Date>(SupportedType.DATE),
     };
 
     const model = {
@@ -149,7 +154,9 @@ describe("validateSchema with TypeScript types", () => {
 
   it("handles schema with no corresponding model fields", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string").required("This field is required."),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
     };
 
     const model = {};
@@ -164,7 +171,9 @@ describe("validateSchema with TypeScript types", () => {
 
   it("handles additional unsupported model fields gracefully", () => {
     const schema: ValidationSchema = {
-      field1: typeField<string>("string").required("This field is required."),
+      field1: typeField<string>(SupportedType.STRING).required(
+        "This field is required."
+      ),
     };
 
     const model = {
