@@ -1,4 +1,4 @@
-import { Validator } from "@/validation/validator";
+import { Validator } from "@/validation/validator/validator";
 import { supportedTypes, SupportedType } from "@/type-checking";
 import { checkTsType } from "@/type-checking";
 
