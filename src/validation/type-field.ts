@@ -6,7 +6,11 @@ export function typeField<T>(typeName?: string): Validator<T> {
   // Attempt to infer type name if not provided
   if (!typeName) {
     typeName = checkTsType(null as T);
-    if (!typeName) {
+    if (
+      [SupportedType.UNDEFINED, SupportedType.NULL].includes(
+        typeName as SupportedType
+      )
+    ) {
       throw new Error("Cannot infer type name from T");
     }
   }
