@@ -1,66 +1,60 @@
-import { RuleType } from "../validation-types";
 import { ValidatorBase } from "./validator-base";
 
-interface IStringValidations {
-  minLength(length: number, message: string): this;
-  maxLength(length: number, message: string): this;
-}
-
-interface IGlobalValidations {
-  required(message: string): this;
-  custom(
-    customFn: (value: any, model: Record<string, any>) => boolean,
-    message: string
-  ): this;
-}
-
-interface INumberValidations {
-  minValue(size: number, message: string): this;
-  maxValue(size: number, message: string): this;
-}
-
-export class Validator<T>
-  extends ValidatorBase<T>
-  implements IStringValidations, IGlobalValidations, INumberValidations
-{
+export class Validator<T> extends ValidatorBase<T> {
   required(message: string): this {
-    this.rules.push({ type: RuleType.REQUIRED, message });
+    this.rules.push({
+      type: "required",
+      message,
+      customFn: value => value != null && value !== "" && value !== undefined,
+    });
     return this;
   }
 
   minLength(length: number, message: string): this {
-    this.rules.push({ type: RuleType.MIN_LENGTH, params: { length }, message });
+    this.rules.push({
+      type: "minLength",
+      params: { length },
+      message,
+      customFn: value => (value as string).length >= length,
+    });
     return this;
   }
 
   maxLength(length: number, message: string): this {
-    this.rules.push({ type: RuleType.MAX_LENGTH, params: { length }, message });
+    this.rules.push({
+      type: "maxLength",
+      params: { length },
+      message,
+      customFn: value => (value as string).length <= length,
+    });
     return this;
   }
 
   minValue(size: number, message: string): this {
     this.rules.push({
-      type: RuleType.MIN_VALUE,
+      type: "minValue",
       params: { size },
       message,
+      customFn: value => (value as number) >= size,
     });
     return this;
   }
 
   maxValue(size: number, message: string): this {
     this.rules.push({
-      type: RuleType.MAX_VALUE,
+      type: "maxValue",
       params: { size },
       message,
+      customFn: value => (value as number) <= size,
     });
     return this;
   }
 
   custom(
-    customFn: (value: T, model: Record<string, any>) => boolean,
+    customFn: (value: T, model: Record<string, unknown>) => boolean,
     message: string
   ): this {
-    this.rules.push({ type: RuleType.CUSTOM, customFn, message });
+    this.rules.push({ type: "custom", customFn: customFn, message });
     return this;
   }
 }

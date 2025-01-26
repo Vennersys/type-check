@@ -1,29 +1,32 @@
-import { RuleType, ValidationResult } from "../validation-types";
-import { mapRule } from "./rules";
+import { ValidationResult } from "../validation-types";
 
 export class ValidatorBase<T> {
   rules: {
-    type: RuleType;
-    params?: Record<string, any>;
+    type: string;
+    params?: Record<string, unknown>;
     message: string;
-    customFn?: (value: T, model: Record<string, any>) => boolean;
+    customFn?: (value: T, model: Record<string, unknown>) => boolean;
   }[] = [];
 
   public evaluateRule(
     rule: {
-      type: RuleType;
-      params?: Record<string, any>;
+      type: string;
+      params?: Record<string, unknown>;
       message: string;
-      customFn?: (value: T, model: Record<string, any>) => boolean;
+      customFn?: (value: T, model: Record<string, unknown>) => boolean;
     },
     value: T,
-    model: Record<string, any>
+    model: Record<string, unknown>
   ): { valid: boolean; validationMessages: string[] } {
-    const { type, params, customFn, message } = rule;
-    return mapRule(type, message, value, model, params, customFn);
+    const { customFn, message } = rule;
+    const isValid = customFn ? customFn(value, model) : true;
+    return {
+      valid: isValid,
+      validationMessages: isValid ? [] : [message],
+    };
   }
 
-  validate(value: T, model: Record<string, any>): ValidationResult {
+  public validate(value: T, model: Record<string, unknown>): ValidationResult {
     return this.rules.reduce<ValidationResult>(
       (result, rule) => {
         const { valid, validationMessages } = this.evaluateRule(
@@ -43,7 +46,7 @@ export class ValidatorBase<T> {
     );
   }
 
-  getRules() {
+  public getRules() {
     return this.rules;
   }
 }
