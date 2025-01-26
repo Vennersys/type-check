@@ -5,7 +5,7 @@ export class ValidatorBase<T> {
     type: string;
     params?: Record<string, unknown>;
     message: string;
-    customFn?: (value: T, model: Record<string, unknown>) => boolean;
+    validationFunction?: (value: T, model: Record<string, unknown>) => boolean;
   }[] = [];
 
   public evaluateRule(
@@ -13,13 +13,18 @@ export class ValidatorBase<T> {
       type: string;
       params?: Record<string, unknown>;
       message: string;
-      customFn?: (value: T, model: Record<string, unknown>) => boolean;
+      validationFunction?: (
+        value: T,
+        model: Record<string, unknown>
+      ) => boolean;
     },
     value: T,
     model: Record<string, unknown>
   ): { valid: boolean; validationMessages: string[] } {
-    const { customFn, message } = rule;
-    const isValid = customFn ? customFn(value, model) : true;
+    const { validationFunction, message } = rule;
+    const isValid = validationFunction
+      ? validationFunction(value, model)
+      : true;
     return {
       valid: isValid,
       validationMessages: isValid ? [] : [message],

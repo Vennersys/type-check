@@ -5,7 +5,8 @@ export class Validator<T> extends ValidatorBase<T> {
     this.rules.push({
       type: "required",
       message,
-      customFn: value => value != null && value !== "" && value !== undefined,
+      validationFunction: value =>
+        value != null && value !== "" && value !== undefined,
     });
     return this;
   }
@@ -15,7 +16,7 @@ export class Validator<T> extends ValidatorBase<T> {
       type: "minLength",
       params: { length },
       message,
-      customFn: value => (value as string).length >= length,
+      validationFunction: value => (value as string).length >= length,
     });
     return this;
   }
@@ -25,7 +26,7 @@ export class Validator<T> extends ValidatorBase<T> {
       type: "maxLength",
       params: { length },
       message,
-      customFn: value => (value as string).length <= length,
+      validationFunction: value => (value as string).length <= length,
     });
     return this;
   }
@@ -35,7 +36,7 @@ export class Validator<T> extends ValidatorBase<T> {
       type: "minValue",
       params: { size },
       message,
-      customFn: value => (value as number) >= size,
+      validationFunction: value => (value as number) >= size,
     });
     return this;
   }
@@ -45,16 +46,20 @@ export class Validator<T> extends ValidatorBase<T> {
       type: "maxValue",
       params: { size },
       message,
-      customFn: value => (value as number) <= size,
+      validationFunction: value => (value as number) <= size,
     });
     return this;
   }
 
   custom(
-    customFn: (value: T, model: Record<string, unknown>) => boolean,
+    validationFunction: (value: T, model: Record<string, unknown>) => boolean,
     message: string
   ): this {
-    this.rules.push({ type: "custom", customFn: customFn, message });
+    this.rules.push({
+      type: "custom",
+      validationFunction: validationFunction,
+      message,
+    });
     return this;
   }
 }
