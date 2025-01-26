@@ -11,8 +11,8 @@ hero:
       text: Getting Started
       link: /getting-started
     - theme: alt
-      text: API Reference
-      link: /api-reference
+      text: Validation
+      link: /validate-schema
 
 features:
   - title: Check JS Types

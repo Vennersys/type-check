@@ -33,6 +33,9 @@ describe("evaluateSchema", () => {
         maxValue: null,
         minValue: null,
         custom: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -58,6 +61,9 @@ describe("evaluateSchema", () => {
         maxValue: null,
         minValue: null,
         custom: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -88,6 +94,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -118,6 +127,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -144,6 +156,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -170,6 +185,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -212,6 +230,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
       field2: {
         required: null,
@@ -223,6 +244,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -243,6 +267,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
