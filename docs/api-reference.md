@@ -26,6 +26,14 @@ Sets a minimum length for the field (for strings, arrays, etc.).
 
 Sets a maximum length for the field (for strings, arrays, etc.).
 
+#### `minValue(value: number, message: string): Validator<T>`
+
+Sets a minimum value for the field (for numbers).
+
+#### `maxValue(value: number, message: string): Validator<T>`
+
+Sets a maximum value for the field (for numbers).
+
 #### `custom(fn: (value: T, model: Record<string, any>) => boolean, message: string): Validator<T>`
 
 Adds a custom validation rule.
