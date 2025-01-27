@@ -1,4 +1,4 @@
-import { Validator } from "./validator";
+import { Validator } from "./validator/validator";
 import { RuleType } from "./validation-types";
 
 export function evaluateSchema(
