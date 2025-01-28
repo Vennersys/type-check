@@ -18,6 +18,8 @@ export default defineConfig({
         items: [
           { text: "Getting Started", link: "/getting-started" },
           { text: "API Reference", link: "/api-reference" },
+          { text: "Validate Schema", link: "/validate-schema" },
+          { text: "Evaluate Schema", link: "/evaluate-schema" },
         ],
       },
     ],

@@ -33,6 +33,9 @@ describe("evaluateSchema", () => {
         maxValue: null,
         minValue: null,
         custom: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -58,6 +61,9 @@ describe("evaluateSchema", () => {
         maxValue: null,
         minValue: null,
         custom: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -88,6 +94,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -118,6 +127,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -125,7 +137,7 @@ describe("evaluateSchema", () => {
   it("includes satisfied custom rules as valid: true", () => {
     const schema = {
       field2: typeField<Date>(SupportedType.DATE).custom(
-        (value, model) => value > new Date("2023-01-01"),
+        value => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
     };
@@ -144,6 +156,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -151,7 +166,7 @@ describe("evaluateSchema", () => {
   it("includes unmet custom rules as valid: false", () => {
     const schema = {
       field2: typeField<Date>(SupportedType.DATE).custom(
-        (value, model) => value > new Date("2023-01-01"),
+        value => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
     };
@@ -170,6 +185,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -181,7 +199,7 @@ describe("evaluateSchema", () => {
         .minLength(3, "Minimum length is 3.")
         .maxLength(5, "Maximum length is 5."),
       field2: typeField<Date>(SupportedType.DATE).custom(
-        (value, model) => value > new Date("2023-01-01"),
+        value => value > new Date("2023-01-01"),
         "Date must be after 2023-01-01."
       ),
     };
@@ -212,6 +230,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
       field2: {
         required: null,
@@ -223,6 +244,9 @@ describe("evaluateSchema", () => {
         },
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });
@@ -243,6 +267,9 @@ describe("evaluateSchema", () => {
         custom: null,
         maxValue: null,
         minValue: null,
+        isEmail: null,
+        isPhoneNumber: null,
+        isPostcode: null,
       },
     });
   });

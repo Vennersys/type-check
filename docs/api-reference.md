@@ -34,19 +34,18 @@ Sets a minimum value for the field (for numbers).
 
 Sets a maximum value for the field (for numbers).
 
+#### `isEmail(message: string): Validator<T>`
+
+Validates that the field is a valid email address.
+
+#### `isPostcode(message: string): Validator<T>`
+
+Validates that the field is a valid UK postcode.
+
+#### `isPhoneNumber(message: string): Validator<T>`
+
+Validates that the field is a valid phone number.
+
 #### `custom(fn: (value: T, model: Record<string, any>) => boolean, message: string): Validator<T>`
 
 Adds a custom validation rule.
-
----
-
-### `validateSchema(schema: Record<string, Validator<any>>, model: Record<string, any>): Record<string, any>`
-
-Validates the given data model against the schema.
-
-- **Parameters**:
-
-  - `schema`: The validation schema.
-  - `model`: The data model to validate.
-
-- **Returns**: A detailed validation result for each field.

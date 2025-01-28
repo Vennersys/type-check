@@ -112,7 +112,7 @@ describe("validateSchema with TypeScript types", () => {
         .required("This field is required.")
         .maxLength(10, "Maximum length is 10."),
       field2: typeField<Date>(SupportedType.DATE).custom(
-        (value, model) => value <= new Date(),
+        value => value <= new Date(),
         "Date cannot be in the future."
       ),
     };

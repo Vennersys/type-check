@@ -1,40 +1,35 @@
-import { RuleType } from "../validation-types";
 import { ValidatorBase } from "./validator-base";
+import { checkDataType } from "@/type-checking/check-data-type";
+import { RuleType } from "@/validation/validation-types";
 
-interface IStringValidations {
-  minLength(length: number, message: string): this;
-  maxLength(length: number, message: string): this;
-}
-
-interface IGlobalValidations {
-  required(message: string): this;
-  custom(
-    customFn: (value: any, model: Record<string, any>) => boolean,
-    message: string
-  ): this;
-}
-
-interface INumberValidations {
-  minValue(size: number, message: string): this;
-  maxValue(size: number, message: string): this;
-}
-
-export class Validator<T>
-  extends ValidatorBase<T>
-  implements IStringValidations, IGlobalValidations, INumberValidations
-{
+export class Validator<T> extends ValidatorBase<T> {
   required(message: string): this {
-    this.rules.push({ type: RuleType.REQUIRED, message });
+    this.rules.push({
+      type: RuleType.REQUIRED,
+      message,
+      validationFunction: value =>
+        value != null && value !== "" && value !== undefined,
+    });
     return this;
   }
 
   minLength(length: number, message: string): this {
-    this.rules.push({ type: RuleType.MIN_LENGTH, params: { length }, message });
+    this.rules.push({
+      type: RuleType.MIN_LENGTH,
+      params: { length },
+      message,
+      validationFunction: value => (value as string).length >= length,
+    });
     return this;
   }
 
   maxLength(length: number, message: string): this {
-    this.rules.push({ type: RuleType.MAX_LENGTH, params: { length }, message });
+    this.rules.push({
+      type: RuleType.MAX_LENGTH,
+      params: { length },
+      message,
+      validationFunction: value => (value as string).length <= length,
+    });
     return this;
   }
 
@@ -43,6 +38,7 @@ export class Validator<T>
       type: RuleType.MIN_VALUE,
       params: { size },
       message,
+      validationFunction: value => (value as number) >= size,
     });
     return this;
   }
@@ -52,15 +48,47 @@ export class Validator<T>
       type: RuleType.MAX_VALUE,
       params: { size },
       message,
+      validationFunction: value => (value as number) <= size,
+    });
+    return this;
+  }
+
+  isEmail(message: string): this {
+    this.rules.push({
+      type: RuleType.IS_EMAIL,
+      message,
+      validationFunction: value => checkDataType(value).validEmail(),
+    });
+    return this;
+  }
+
+  isPostcode(message: string): this {
+    this.rules.push({
+      type: RuleType.IS_POSTCODE,
+      message,
+      validationFunction: value => checkDataType(value).validUkPostcode(),
+    });
+    return this;
+  }
+
+  isPhoneNumber(message: string): this {
+    this.rules.push({
+      type: RuleType.IS_PHONE_NUMBER,
+      message,
+      validationFunction: value => checkDataType(value).validPhoneNumber(),
     });
     return this;
   }
 
   custom(
-    customFn: (value: T, model: Record<string, any>) => boolean,
+    validationFunction: (value: T, model: Record<string, unknown>) => boolean,
     message: string
   ): this {
-    this.rules.push({ type: RuleType.CUSTOM, customFn, message });
+    this.rules.push({
+      type: RuleType.CUSTOM,
+      validationFunction: validationFunction,
+      message,
+    });
     return this;
   }
 }

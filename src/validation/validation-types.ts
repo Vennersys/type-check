@@ -4,15 +4,15 @@ export type ValidationResult = {
 };
 
 export type FieldValidator<T> = {
-  validate: (value: T, model: Record<string, any>) => ValidationResult;
+  validate: (value: T, model: Record<string, unknown>) => ValidationResult;
   getRules: () => {
     type: string;
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
     message: string;
   }[];
 };
 
-export type ValidationSchema = Record<string, FieldValidator<any>>;
+export type ValidationSchema = Record<string, FieldValidator<unknown>>;
 
 export enum RuleType {
   REQUIRED = "required",
@@ -21,4 +21,7 @@ export enum RuleType {
   MIN_VALUE = "minValue",
   MAX_VALUE = "maxValue",
   CUSTOM = "custom",
+  IS_EMAIL = "isEmail",
+  IS_POSTCODE = "isPostcode",
+  IS_PHONE_NUMBER = "isPhoneNumber",
 }

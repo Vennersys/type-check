@@ -2,7 +2,7 @@ import { ValidationResult, ValidationSchema } from "./validation-types";
 
 export function validateSchema(
   schema: ValidationSchema,
-  model: Record<string, any>
+  model: Record<string, unknown>
 ): Record<string, ValidationResult> {
   const result: Record<string, ValidationResult> = {};
   for (const field in schema) {
