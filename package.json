@@ -1,6 +1,6 @@
 {
   "name": "@leewinter/type-check",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "author": "lee.winter@boxspark.co.uk",
   "license": "MIT",
   "description": "Library for checking js object property types",
