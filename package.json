@@ -9,7 +9,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/@leewinter/type-check.js"
+      "import": "./dist/@vennersys/type-check.js"
     },
     "./dist/": {
       "import": "./dist/"
