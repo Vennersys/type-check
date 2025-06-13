@@ -1,6 +1,6 @@
 {
   "name": "@vennersys/type-check",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "lee.winter@boxspark.co.uk",
   "license": "MIT",
   "description": "Library for checking js object property types",
