@@ -1,11 +1,11 @@
 {
-  "name": "@leewinter/type-check",
+  "name": "@vennersys/type-check",
   "version": "0.4.0",
   "author": "lee.winter@boxspark.co.uk",
   "license": "MIT",
   "description": "Library for checking js object property types",
   "type": "module",
-  "module": "./dist/@leewinter/type-check.js",
+  "module": "./dist/@vennersys/type-check.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
