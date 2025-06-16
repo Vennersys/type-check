@@ -1,11 +1,11 @@
-# [type-check](https://leewinter.github.io/type-check/)
+# [type-check](https://vennersys.github.io/type-check/)
 
-[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@leewinter/type-check)
+[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@vennersys/type-check)
 
-![License: MIT](https://img.shields.io/github/license/leewinter/type-check)
-![Version](https://img.shields.io/github/package-json/v/leewinter/type-check)
-![GitHub last commit](https://img.shields.io/github/last-commit/leewinter/type-check)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/leewinter/type-check)
+![License: MIT](https://img.shields.io/github/license/vennersys/type-check)
+![Version](https://img.shields.io/github/package-json/v/vennersys/type-check)
+![GitHub last commit](https://img.shields.io/github/last-commit/vennersys/type-check)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/vennersys/type-check)
 
 A lightweight and flexible JavaScript/TypeScript library for validating data structures with support for multiple data types, including strings, numbers, objects, arrays, functions, and symbols. This library provides a unified and extensible API for both runtime and compile-time validation.
 
@@ -22,7 +22,7 @@ A lightweight and flexible JavaScript/TypeScript library for validating data str
 
 ---
 
-## [Visit the docs](https://leewinter.github.io/type-check/)
+## [Visit the docs](https://vennersys.github.io/type-check/)
 
 ## Contributing
 
@@ -43,4 +43,4 @@ This library is licensed under the [MIT License](LICENSE).
 
 ## Support
 
-For any questions or issues, feel free to open an issue on [GitHub](https://github.com/leewinter/type-check).
+For any questions or issues, feel free to open an issue on [GitHub](https://github.com/vennersys/type-check).
